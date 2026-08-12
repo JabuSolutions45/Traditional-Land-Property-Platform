@@ -10,7 +10,15 @@ Umeli is intended to record property-listing, identity-information, community-re
 
 ## Current task boundary
 
-The national Excel location master is preserved as the first data-foundation deliverable. The project owner has now authorised a Phase 0 application foundation. Authentication, listings, identity checks, approval workflows, payments and production database work remain deferred.
+The national Excel location master is preserved as the first data-foundation
+deliverable. Phase 0 is complete. The review application now includes a genuine
+server-side national location search generated from the workbook. The search is
+read-only and temporary until an approved Supabase region and production
+database are configured.
+
+Authentication, listings, identity checks, approval workflows, payments and
+production database work remain separate security-sensitive phases. The public
+review site must not present those explanatory journeys as active services.
 
 ## Non-negotiable controls
 
