@@ -24,6 +24,7 @@ WORKBOOK = (
     / "Umeli_South_Africa_Location_Master_MDB_2026.xlsx"
 )
 OUTPUT = ROOT / "data" / "location-search.json"
+SHARD_SIZE = 3_500
 
 
 def normalize(value: Any) -> str:
@@ -198,6 +199,23 @@ def main() -> None:
             ]
         )
 
+    shard_names: list[str] = []
+    OUTPUT.parent.mkdir(parents=True, exist_ok=True)
+    for stale_shard in OUTPUT.parent.glob("location-search-[0-9][0-9].json"):
+        stale_shard.unlink()
+
+    for index, start in enumerate(range(0, len(rows), SHARD_SIZE)):
+        shard_name = f"location-search-{index:02d}.json"
+        shard_names.append(shard_name)
+        (OUTPUT.parent / shard_name).write_text(
+            json.dumps(
+                {"rows": rows[start : start + SHARD_SIZE]},
+                ensure_ascii=False,
+                separators=(",", ":"),
+            ),
+            encoding="utf-8",
+        )
+
     payload = {
         "version": "2026-08-12",
         "source": WORKBOOK.name,
@@ -223,10 +241,9 @@ def main() -> None:
             "places": len(places),
             "totalSearchRecords": len(rows),
         },
-        "rows": rows,
+        "shards": shard_names,
     }
 
-    OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT.write_text(
         json.dumps(payload, ensure_ascii=False, separators=(",", ":")),
         encoding="utf-8",
@@ -238,6 +255,10 @@ def main() -> None:
                 "places": len(places),
                 "search_records": len(rows),
                 "bytes": OUTPUT.stat().st_size,
+                "shards": len(shard_names),
+                "largest_shard_bytes": max(
+                    (OUTPUT.parent / name).stat().st_size for name in shard_names
+                ),
             },
             indent=2,
         )
