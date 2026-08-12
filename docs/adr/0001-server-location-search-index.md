@@ -15,9 +15,11 @@ The complete national dataset must not be downloaded into a user's browser.
 
 ## Decision
 
-Generate a compact read-only JSON index from the workbook and search it only in
-Next.js server code. The browser sends an ordinary GET query and receives only
-the rendered top results. No personal information is collected.
+Generate a compact read-only JSON manifest and bounded index shards from the
+workbook and search them only in Next.js server code. The shards keep repository
+uploads reviewable and fail closed if one is missing. The browser sends an
+ordinary GET query and receives only the rendered top results. No personal
+information is collected.
 
 The search provider is kept behind `lib/locations/search.ts` so the same user
 interface can later use indexed PostgreSQL search without changing its public
