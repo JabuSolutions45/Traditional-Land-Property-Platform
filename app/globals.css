@@ -189,19 +189,59 @@ h3 {
   font-size: 1.05rem;
   font-weight: 850;
 }
-.search-display {
-  padding: 0.9rem 1rem;
-  border: 1px solid #aebbb5;
-  border-radius: 0.55rem;
+.location-search {
+  margin-top: 1.5rem;
+}
+.location-search label {
+  display: block;
+  margin-bottom: 0.45rem;
+  color: var(--ink);
+  font-weight: 850;
+}
+.search-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.6rem;
+}
+.search-controls input {
+  min-width: 0;
+  min-height: 3rem;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid #879991;
+  border-radius: 0.6rem;
+  color: var(--ink);
+  background: white;
+  font: inherit;
+}
+.search-controls input:focus-visible {
+  border-color: var(--green);
+  outline: 3px solid rgb(217 171 75 / 55%);
+  outline-offset: 1px;
+}
+.search-help {
+  margin: 0.55rem 0 0;
   color: var(--muted);
+  font-size: 0.86rem;
 }
-.search-display span {
-  margin-right: 0.5rem;
-  font-size: 1.2rem;
+.compact-search {
+  margin-top: 0;
 }
-.search-button {
+.compact-search label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.compact-search .search-controls {
+  grid-template-columns: 1fr;
+}
+.compact-search .button {
   width: 100%;
-  margin-top: 0.75rem;
 }
 .popular-areas {
   display: flex;
@@ -394,6 +434,129 @@ h3 {
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
+.search-page-hero {
+  padding-bottom: 3.5rem;
+}
+.search-page-hero .location-search {
+  max-width: 47rem;
+}
+.search-results-section {
+  padding-top: 2.5rem;
+}
+.dataset-note {
+  display: grid;
+  gap: 0.2rem;
+  padding: 1rem 1.1rem;
+  border-left: 4px solid var(--gold);
+  background: var(--cream);
+}
+.dataset-note span {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.search-start-state,
+.empty-search {
+  padding: 3.5rem 0 1rem;
+}
+.search-start-state h2,
+.empty-search h2 {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+}
+.search-start-state > p,
+.empty-search > p {
+  max-width: 44rem;
+  color: var(--muted);
+}
+.query-examples {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-top: 1.2rem;
+}
+.query-examples a {
+  padding: 0.55rem 0.8rem;
+  border: 1px solid #a9c8ba;
+  border-radius: 2rem;
+  color: var(--green);
+  background: #f1f8f5;
+  font-weight: 750;
+  text-decoration: none;
+}
+.results-summary {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 2.5rem 0 1rem;
+}
+.results-summary h2 {
+  max-width: 28ch;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+}
+.results-summary > span {
+  flex: none;
+  color: var(--muted);
+  font-weight: 750;
+}
+.location-results {
+  display: grid;
+  gap: 0.8rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.location-result {
+  padding: 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: 0.9rem;
+  background: white;
+}
+.location-result.data-gap {
+  border-color: #d7b66c;
+  background: #fff9eb;
+}
+.result-heading {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.result-heading h2 {
+  margin: 0.2rem 0 0;
+  font-size: 1.5rem;
+}
+.ward-chip {
+  flex: none;
+  padding: 0.35rem 0.55rem;
+  border-radius: 1rem;
+  color: var(--green-dark);
+  background: var(--cream);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+.result-context {
+  margin: 0.65rem 0 0;
+  color: var(--muted);
+}
+.landmark-note,
+.result-warning,
+.result-source {
+  margin: 0.7rem 0 0;
+  font-size: 0.88rem;
+}
+.landmark-note {
+  color: var(--green-dark);
+}
+.result-warning {
+  padding: 0.65rem 0.75rem;
+  border-left: 3px solid var(--gold);
+  color: #5a461e;
+  background: #fff9eb;
+}
+.result-source {
+  color: #77827e;
+  overflow-wrap: anywhere;
+}
 .empty-help {
   margin-top: 3rem;
   padding: 2rem;
@@ -580,6 +743,17 @@ h3 {
     align-items: flex-start;
     flex-direction: column;
     gap: 0.8rem;
+  }
+  .search-controls {
+    grid-template-columns: 1fr;
+  }
+  .search-controls .button {
+    width: 100%;
+  }
+  .results-summary,
+  .result-heading {
+    align-items: flex-start;
+    flex-direction: column;
   }
   .footer-grid {
     grid-template-columns: 1fr 1fr;
