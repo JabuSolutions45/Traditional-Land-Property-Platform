@@ -1,4 +1,16 @@
-import locationData from "@/data/location-search.json";
+import locationManifest from "@/data/location-search.json";
+import shard00 from "@/data/location-search-00.json";
+import shard01 from "@/data/location-search-01.json";
+import shard02 from "@/data/location-search-02.json";
+import shard03 from "@/data/location-search-03.json";
+import shard04 from "@/data/location-search-04.json";
+import shard05 from "@/data/location-search-05.json";
+import shard06 from "@/data/location-search-06.json";
+import shard07 from "@/data/location-search-07.json";
+import shard08 from "@/data/location-search-08.json";
+import shard09 from "@/data/location-search-09.json";
+import shard10 from "@/data/location-search-10.json";
+import shard11 from "@/data/location-search-11.json";
 import { z } from "zod";
 
 export const locationQuerySchema = z
@@ -41,7 +53,7 @@ interface RawLocationData {
     places: number;
     totalSearchRecords: number;
   };
-  rows: RawLocationRow[];
+  shards: string[];
 }
 
 export interface LocationSearchResult {
@@ -61,7 +73,25 @@ export interface LocationSearchResult {
   warning: string | null;
 }
 
-const data = locationData as unknown as RawLocationData;
+const data = locationManifest as unknown as RawLocationData;
+const rows = [
+  ...shard00.rows,
+  ...shard01.rows,
+  ...shard02.rows,
+  ...shard03.rows,
+  ...shard04.rows,
+  ...shard05.rows,
+  ...shard06.rows,
+  ...shard07.rows,
+  ...shard08.rows,
+  ...shard09.rows,
+  ...shard10.rows,
+  ...shard11.rows,
+] as unknown as RawLocationRow[];
+
+if (rows.length !== data.counts.totalSearchRecords) {
+  throw new Error("The location search index is incomplete.");
+}
 
 export const locationDatasetSummary = {
   version: data.version,
@@ -111,7 +141,7 @@ function typeLabel(kind: LocationKind, level: string): string {
   return level === "main_place" ? "Main place" : "Sub-place";
 }
 
-const preparedRecords = data.rows.map((row) => {
+const preparedRecords = rows.map((row) => {
   const [
     id,
     kind,
