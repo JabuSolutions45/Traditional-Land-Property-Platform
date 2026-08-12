@@ -7,7 +7,9 @@ Umeli is a proposed mobile-first South African platform for recording customary 
 Phase 0 provides a secure, testable web foundation and preserves the completed location-data work:
 
 - A Next.js application using strict TypeScript.
-- A responsive, accessible project landing page.
+- A responsive, accessible seven-page public service prototype.
+- Review journeys for finding an area, preparing to sell, mobile registration,
+  understanding checks, programme information and safety guidance.
 - A JSON health endpoint at `/health`.
 - Environment validation and documented Supabase placeholders.
 - Automated linting, type-checking, tests and production builds.
@@ -17,7 +19,20 @@ Phase 0 provides a secure, testable web foundation and preserves the completed l
 - Database-ready sheets aligned to the proposed location entities.
 - Source, limitation and import-audit sheets.
 
-Authentication, listings, identity checks, approval workflows, payments and a production database have not been implemented.
+The review journeys are intentionally informational: they do not collect personal
+information or present sample areas as live property listings. Authentication,
+listings, identity checks, approval workflows, payments and a production database
+have not been implemented.
+
+## Review pages
+
+- `/` — search-led service home.
+- `/properties` — national area-search structure and pilot examples.
+- `/sell` — seller preparation journey.
+- `/account` — mobile registration and sign-in explanation.
+- `/how-it-works` — descriptive checks and geographic model.
+- `/about` — programme purpose and limitations.
+- `/help` — user safety and correction guidance.
 
 ## Local setup
 
