@@ -1,100 +1,161 @@
-const principles = [
-  "Mobile-first and usable on slow connections",
-  "Clear records of what was checked and by whom",
-  "Municipal and traditional geography kept distinct",
-  "No claim to determine ownership or legal title",
-] as const;
+import Link from "next/link";
+import { PageShell } from "@/components/page-shell";
 
-const firstServices = [
-  {
-    title: "Find the right area",
-    description:
-      "Search by village, town or municipality when the national directory opens.",
-    status: "Location directory being prepared",
-  },
-  {
-    title: "Understand the checks",
-    description:
-      "See exactly what information was supplied, reviewed or still needs attention.",
-    status: "Plain-language process",
-  },
-  {
-    title: "Follow the Limpopo pilot",
-    description:
-      "The first planned pilot focuses on Giyani, Malamulele and Venda.",
-    status: "Pilot preparation",
-  },
+const steps = [
+  [
+    "1",
+    "Find the area",
+    "Search using the village, town, municipality or traditional authority you know.",
+  ],
+  [
+    "2",
+    "Read the record",
+    "See what information was supplied, what was checked and what is still pending.",
+  ],
+  [
+    "3",
+    "Speak safely",
+    "Send interest through Umeli before personal contact details are shared.",
+  ],
 ] as const;
 
 export default function Home() {
   return (
-    <main>
-      <section className="hero" aria-labelledby="page-title">
-        <div className="shell">
-          <p className="eyebrow">South African property information</p>
-          <h1 id="page-title">
-            A clearer path for property information on customary land.
-          </h1>
-          <p className="intro">
-            Umeli is being designed to help communities record locations,
-            supporting information and review decisions in a secure, auditable
-            way.
-          </p>
-          <div className="notice" role="note">
-            Umeli records submitted information and review steps. It does not
-            determine ownership, title or legal validity.
+    <PageShell>
+      <section className="home-hero" aria-labelledby="page-title">
+        <div className="shell hero-grid">
+          <div>
+            <p className="eyebrow">South African customary-land property</p>
+            <h1 id="page-title">Find the place. Understand the process.</h1>
+            <p className="intro">
+              Umeli is a simple property-information service designed around
+              villages, communities and the authorities that serve them.
+            </p>
+            <div className="hero-actions">
+              <Link className="button button-primary" href="/properties">
+                Find property
+              </Link>
+              <Link className="button button-light" href="/sell">
+                Sell a property
+              </Link>
+            </div>
+            <p className="pilot-note">
+              <span aria-hidden="true">●</span> Pilot preparation: Giyani,
+              Malamulele and Venda
+            </p>
           </div>
-          <a className="primary-link" href="#first-services">
-            See what Umeli will offer
-          </a>
+          <div className="search-card" aria-label="Location search preview">
+            <p className="search-label">Where are you looking?</p>
+            <div className="search-display">
+              <span aria-hidden="true">⌕</span> Village, town or municipality
+            </div>
+            <Link
+              className="button button-primary search-button"
+              href="/properties"
+            >
+              Search areas
+            </Link>
+            <div className="popular-areas">
+              <span>Popular:</span>
+              <Link href="/properties#limpopo">Giyani</Link>
+              <Link href="/properties#limpopo">Malamulele</Link>
+              <Link href="/properties#gauteng">Diepsloot</Link>
+            </div>
+          </div>
         </div>
       </section>
 
       <section
-        className="services"
-        id="first-services"
-        aria-labelledby="services-title"
+        className="trust-strip"
+        aria-label="Important service information"
       >
-        <div className="shell">
-          <p className="eyebrow">First services</p>
-          <h2 id="services-title">Start with one clear need</h2>
-          <p className="section-intro">
-            Umeli is being introduced in small, understandable steps. No
-            account or personal information is required on this page.
+        <div className="shell trust-grid">
+          <p>
+            <strong>Clear location context</strong>
+            <span>Village, ward, municipality and authority links</span>
           </p>
-          <ul className="service-list">
-            {firstServices.map((service, index) => (
-              <li key={service.title}>
-                <span className="service-number" aria-hidden="true">
-                  {index + 1}
-                </span>
-                <div>
-                  <h3>{service.title}</h3>
-                  <p>{service.description}</p>
-                  <span className="status">{service.status}</span>
-                </div>
-              </li>
-            ))}
-          </ul>
+          <p>
+            <strong>Descriptive checks</strong>
+            <span>No vague “verified” promises</span>
+          </p>
+          <p>
+            <strong>People remain involved</strong>
+            <span>Important decisions stay reviewable</span>
+          </p>
         </div>
       </section>
 
-      <section className="principles" aria-labelledby="principles-title">
+      <section className="section" aria-labelledby="start-title">
         <div className="shell">
-          <p className="eyebrow">Foundation principles</p>
-          <h2 id="principles-title">Built for trust through clarity</h2>
-          <ul>
-            {principles.map((principle) => (
-              <li key={principle}>{principle}</li>
-            ))}
-          </ul>
-          <p className="closing-note">
-            Important decisions will remain reviewable by people. Umeli will
-            not use artificial intelligence to approve a property or make a
-            legal conclusion.
-          </p>
+          <p className="eyebrow">Simple from the start</p>
+          <h2 id="start-title">What do you want to do?</h2>
+          <div className="choice-grid">
+            <article className="choice-card green-card">
+              <span className="choice-icon" aria-hidden="true">
+                ⌕
+              </span>
+              <h3>Find a property</h3>
+              <p>
+                Browse by the place names people use, with enough context to
+                distinguish similar areas.
+              </p>
+              <Link href="/properties">Start searching →</Link>
+            </article>
+            <article className="choice-card gold-card">
+              <span className="choice-icon" aria-hidden="true">
+                ＋
+              </span>
+              <h3>Sell a property</h3>
+              <p>
+                Learn what information, photographs and community review steps
+                may be needed.
+              </p>
+              <Link href="/sell">See the seller journey →</Link>
+            </article>
+            <article className="choice-card cream-card">
+              <span className="choice-icon" aria-hidden="true">
+                i
+              </span>
+              <h3>Understand Umeli</h3>
+              <p>
+                See what the service records, who reviews information and what
+                it cannot prove.
+              </p>
+              <Link href="/how-it-works">How it works →</Link>
+            </article>
+          </div>
         </div>
       </section>
-    </main>
+
+      <section className="section steps-section" aria-labelledby="steps-title">
+        <div className="shell split-heading">
+          <div>
+            <p className="eyebrow">For buyers</p>
+            <h2 id="steps-title">A safer way to begin</h2>
+          </div>
+          <p>
+            Umeli will show the status of each check separately, helping buyers
+            ask better questions without exposing private seller information.
+          </p>
+        </div>
+        <div className="shell step-grid">
+          {steps.map(([number, title, description]) => (
+            <article key={number}>
+              <span>{number}</span>
+              <h3>{title}</h3>
+              <p>{description}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="legal-banner">
+        <div className="shell">
+          <strong>Important:</strong> Umeli records submitted information and
+          review steps. It does not determine ownership, title or legal
+          validity. <Link href="/how-it-works">Understand the checks</Link>
+        </div>
+      </section>
+    </PageShell>
   );
 }
