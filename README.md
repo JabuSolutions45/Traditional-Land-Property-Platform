@@ -88,3 +88,7 @@ Subarea categories never infer formal or informal status from a place name alone
 ## Security
 
 Read `SECURITY.md` before adding authentication, identity information, private documents or exact property coordinates. Repository conventions and required checks are in `AGENTS.md`.
+
+## Deployment
+
+The final-review prototype is connected to Vercel for preview deployment.
