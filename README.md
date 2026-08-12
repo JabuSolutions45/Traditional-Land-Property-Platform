@@ -10,6 +10,9 @@ Phase 0 provides a secure, testable web foundation and preserves the completed l
 - A responsive, accessible seven-page public service prototype.
 - Review journeys for finding an area, preparing to sell, mobile registration,
   understanding checks, programme information and safety guidance.
+- Genuine server-side national search across 36,147 place records, municipalities,
+  historical Census 2011 wards, sourced traditional-authority baselines and known
+  mapping gaps.
 - A JSON health endpoint at `/health`.
 - Environment validation and documented Supabase placeholders.
 - Automated linting, type-checking, tests and production builds.
@@ -19,15 +22,15 @@ Phase 0 provides a secure, testable web foundation and preserves the completed l
 - Database-ready sheets aligned to the proposed location entities.
 - Source, limitation and import-audit sheets.
 
-The review journeys are intentionally informational: they do not collect personal
-information or present sample areas as live property listings. Authentication,
-listings, identity checks, approval workflows, payments and a production database
-have not been implemented.
+Area search is active. The remaining review journeys are intentionally
+informational: they do not collect personal information or present sample areas
+as live property listings. Authentication, listings, identity checks, approval
+workflows, payments and a production database have not been implemented.
 
 ## Review pages
 
 - `/` — search-led service home.
-- `/properties` — national area-search structure and pilot examples.
+- `/properties` — working national area search with source limitations.
 - `/sell` — seller preparation journey.
 - `/account` — mobile registration and sign-in explanation.
 - `/how-it-works` — descriptive checks and geographic model.
@@ -85,10 +88,18 @@ The ward link is a centroid-based historical mapping. It does not prove that an 
 
 Subarea categories never infer formal or informal status from a place name alone. Ambiguous records remain `unclassified_subarea` pending municipal, planning or community evidence.
 
+## Location search index
+
+Run the repeatable read-only extraction after an approved workbook update:
+
+```bash
+python3 scripts/build-location-search.py
+```
+
+The generated `data/location-search.json` file remains on the server. Users receive
+only the small ranked result page. Search supports partial names and minor spelling
+errors and retains historical-ward and known-data-gap warnings.
+
 ## Security
 
 Read `SECURITY.md` before adding authentication, identity information, private documents or exact property coordinates. Repository conventions and required checks are in `AGENTS.md`.
-
-## Deployment
-
-The final-review prototype is connected to Vercel for preview deployment.
