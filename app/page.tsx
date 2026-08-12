@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { LocationSearchForm } from "@/components/location-search-form";
 import { PageShell } from "@/components/page-shell";
 
 const steps = [
@@ -44,22 +45,14 @@ export default function Home() {
               Malamulele and Venda
             </p>
           </div>
-          <div className="search-card" aria-label="Location search preview">
+          <div className="search-card" aria-label="National area search">
             <p className="search-label">Where are you looking?</p>
-            <div className="search-display">
-              <span aria-hidden="true">⌕</span> Village, town or municipality
-            </div>
-            <Link
-              className="button button-primary search-button"
-              href="/properties"
-            >
-              Search areas
-            </Link>
+            <LocationSearchForm compact />
             <div className="popular-areas">
               <span>Popular:</span>
-              <Link href="/properties#limpopo">Giyani</Link>
-              <Link href="/properties#limpopo">Malamulele</Link>
-              <Link href="/properties#gauteng">Diepsloot</Link>
+              <Link href="/properties?q=Giyani">Giyani</Link>
+              <Link href="/properties?q=Malamulele">Malamulele</Link>
+              <Link href="/properties?q=Diepsloot">Diepsloot</Link>
             </div>
           </div>
         </div>
