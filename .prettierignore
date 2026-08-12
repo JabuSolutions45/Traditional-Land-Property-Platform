@@ -2,4 +2,5 @@
 coverage
 node_modules
 outputs
+data/location-search*.json
 pnpm-lock.yaml
