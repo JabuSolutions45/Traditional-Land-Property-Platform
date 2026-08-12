@@ -33,10 +33,20 @@ describe("Home", () => {
     ).toBeInTheDocument();
   });
 
-  it("does not collect personal information on the launch page", () => {
+  it("offers national area search without collecting personal information", () => {
     const { container } = render(<Home />);
 
-    expect(container.querySelector("form")).not.toBeInTheDocument();
-    expect(container.querySelector("input")).not.toBeInTheDocument();
+    expect(screen.getByRole("search")).toBeInTheDocument();
+    expect(
+      screen.getByRole("searchbox", {
+        name: /search the national area directory/i,
+      }),
+    ).toHaveAttribute("name", "q");
+    expect(
+      container.querySelector('input[type="tel"]'),
+    ).not.toBeInTheDocument();
+    expect(
+      container.querySelector('input[type="email"]'),
+    ).not.toBeInTheDocument();
   });
 });
