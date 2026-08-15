@@ -13,6 +13,8 @@ Phase 0 provides a secure, testable web foundation and preserves the completed l
 - Genuine server-side national search across 36,147 place records, municipalities,
   historical Census 2011 wards, sourced traditional-authority baselines and known
   mapping gaps.
+- Predictive area suggestions after two letters, limited to eight contextual
+  matches per request for low-bandwidth use.
 - A JSON health endpoint at `/health`.
 - Environment validation and documented Supabase placeholders.
 - Automated linting, type-checking, tests and production builds.
@@ -96,9 +98,10 @@ Run the repeatable read-only extraction after an approved workbook update:
 python3 scripts/build-location-search.py
 ```
 
-The generated `data/location-search.json` file remains on the server. Users receive
-only the small ranked result page. Search supports partial names and minor spelling
-errors and retains historical-ward and known-data-gap warnings.
+The generated `data/location-search.json` manifest and bounded index shards remain
+on the server. Users receive only a small ranked result page or, while typing, at
+most eight suggestions. Search supports partial names and minor spelling errors and
+retains historical-ward and known-data-gap warnings.
 
 ## Security
 
