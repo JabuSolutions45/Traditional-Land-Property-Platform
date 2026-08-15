@@ -38,7 +38,7 @@ describe("Home", () => {
 
     expect(screen.getByRole("search")).toBeInTheDocument();
     expect(
-      screen.getByRole("searchbox", {
+      screen.getByRole("combobox", {
         name: /search the national area directory/i,
       }),
     ).toHaveAttribute("name", "q");
