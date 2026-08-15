@@ -43,6 +43,9 @@ describe("LocationSearchForm predictive suggestions", () => {
       "/api/locations/suggestions?q=ng",
       expect.objectContaining({ signal: expect.any(AbortSignal) }),
     );
+
+    fireEvent.change(input, { target: { value: "ngo" } });
+    expect(screen.queryByRole("listbox")).not.toBeInTheDocument();
   });
 
   it("does not request suggestions for one letter", async () => {
