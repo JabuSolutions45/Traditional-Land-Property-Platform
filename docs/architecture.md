@@ -11,6 +11,11 @@ yet approved.
 reads the compact workbook-derived index on the server. No national dataset is
 included in client code or returned to the browser.
 
+The predictive-search client waits briefly after typing two letters, cancels
+superseded requests and calls `/api/locations/suggestions`. The route validates
+the query and returns no more than eight plain, non-sensitive result summaries.
+The original HTML GET form remains usable without JavaScript.
+
 When Supabase is approved, the provider will call an indexed PostgreSQL search
 function using `pg_trgm` and accent-insensitive normalized names. The public UI
 and result contract should not need to change.
