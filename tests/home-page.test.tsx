@@ -9,26 +9,44 @@ describe("Home", () => {
 
     expect(
       screen.getByRole("heading", {
-        name: /a clearer path for property information/i,
+        name: /find the place. understand the process/i,
       }),
     ).toBeInTheDocument();
     expect(
-      screen.getByText(/does not determine ownership, title or legal validity/i),
-    ).toBeInTheDocument();
+      screen.getAllByText(
+        /does not determine ownership, title or legal validity/i,
+      ),
+    ).not.toHaveLength(0);
   });
 
   it("presents three plain-language starting points", () => {
     render(<Home />);
 
-    expect(screen.getByText("Find the right area")).toBeInTheDocument();
-    expect(screen.getByText("Understand the checks")).toBeInTheDocument();
-    expect(screen.getByText("Follow the Limpopo pilot")).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: "Find a property" }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: "Sell a property" }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: "Understand Umeli" }),
+    ).toBeInTheDocument();
   });
 
-  it("does not collect personal information on the launch page", () => {
+  it("offers national area search without collecting personal information", () => {
     const { container } = render(<Home />);
 
-    expect(container.querySelector("form")).not.toBeInTheDocument();
-    expect(container.querySelector("input")).not.toBeInTheDocument();
+    expect(screen.getByRole("search")).toBeInTheDocument();
+    expect(
+      screen.getByRole("combobox", {
+        name: /search the national area directory/i,
+      }),
+    ).toHaveAttribute("name", "q");
+    expect(
+      container.querySelector('input[type="tel"]'),
+    ).not.toBeInTheDocument();
+    expect(
+      container.querySelector('input[type="email"]'),
+    ).not.toBeInTheDocument();
   });
 });

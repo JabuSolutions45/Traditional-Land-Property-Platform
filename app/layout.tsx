@@ -4,9 +4,12 @@ import type { ReactNode } from "react";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Umeli",
+  title: {
+    default: "Umeli | Customary-land property information",
+    template: "%s | Umeli",
+  },
   description:
-    "A clearer, auditable path for customary-land property information.",
+    "Find places and understand property-information review steps for customary and traditional land in South Africa.",
 };
 
 export default function RootLayout({
