@@ -13,8 +13,9 @@ Umeli is intended to record property-listing, identity-information, community-re
 The national Excel location master is preserved as the first data-foundation
 deliverable. Phase 0 is complete. The review application now includes a genuine
 server-side national location search generated from the workbook. The search is
-read-only and temporary until an approved Supabase region and production
-database are configured.
+read-only, includes bounded predictive suggestions after two letters, and is
+temporary until an approved Supabase region and production database are
+configured.
 
 Authentication, listings, identity checks, approval workflows, payments and
 production database work remain separate security-sensitive phases. The public
