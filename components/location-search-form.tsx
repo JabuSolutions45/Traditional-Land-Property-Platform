@@ -95,12 +95,10 @@ export function LocationSearchForm({
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     const nextQuery = event.target.value;
     setQuery(nextQuery);
-    if (nextQuery.trim().length < 2) {
-      setSuggestions([]);
-      setActiveIndex(-1);
-      setIsOpen(false);
-      setIsLoading(false);
-    }
+    setSuggestions([]);
+    setActiveIndex(-1);
+    setIsOpen(false);
+    setIsLoading(nextQuery.trim().length >= 2);
   }
 
   function submitSuggestion(suggestion: LocationSuggestion) {
